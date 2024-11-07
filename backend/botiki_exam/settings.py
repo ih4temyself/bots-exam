@@ -20,6 +20,7 @@ CORS_ORIGIN_WHITELIST = ("http://localhost:8000",)
 # Application definition
 
 INSTALLED_APPS = [
+    "authapp",
     "rest_framework",
     "rest_framework_simplejwt",
     "corsheaders",
@@ -42,6 +43,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 ROOT_URLCONF = "botiki_exam.urls"
 
