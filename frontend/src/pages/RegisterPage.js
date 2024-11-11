@@ -103,7 +103,7 @@ function RegisterPage() {
                 <button type="submit" className="login_button">Register</button>
             </form>
 
-\            <div className="return-btn-container">
+            <div className="return-btn-container">
                 <Link to="/">
                     <button className="return-btn">Back</button>
                 </Link>
