@@ -16,7 +16,6 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
-                {/* Wrap the MainPage route with ProtectedRoute */}
                 <Route
                     path="/home"
                     element={
