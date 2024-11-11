@@ -1,0 +1,58 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.register:hover{
+    color: #C01BC1;
+}
+
+h2 {
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 30px;
+    border: 1px solid #241D2F;
+}
+
+.login_button {
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background-color: #C01BC1;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 30px;
+}
+
+.login_button:hover {
+    transform: scale(1.05);
+}
+
+
+.login_button:focus {
+    outline: none;
+}
+
+button:hover {
+    background-color: #C01BC1;
+}
+
+p {
+    text-align: center;
+}
+
+a {
+    color: #C01BC1;
+}
+
+a:hover {
+    text-decoration: none;
+}
