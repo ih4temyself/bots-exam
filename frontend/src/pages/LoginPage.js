@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import api from '../axiosConfig';
 import '../styles/LoginPage.css';
 
 function LoginPage() {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        if (email === '' || password === '') {
-            setError('Please enter both email and password');
+        if (username === '' || password === '') {
+            setError('Please enter both username and password');
         } else {
             setError(null);
+            try {
+                const response = await api.post('auth/token/', { username, password });
+                localStorage.setItem('access_token', response.data.access);
+                localStorage.setItem('refresh_token', response.data.refresh);
+                navigate('/home');  // Redirect to main page
+            } catch (error) {
+                setError('Invalid login credentials');
+            }
         }
     };
 
@@ -23,10 +33,10 @@ function LoginPage() {
                 {error && <p style={{ color: 'red' }}>{error}</p>}
 
                 <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
                 <input
                     type="password"
