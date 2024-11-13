@@ -56,3 +56,29 @@ a {
 a:hover {
     text-decoration: none;
 }
+
+.return-btn-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.return-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: transparent;
+  color: white;
+  border-color: #C01BC1;
+  border-width: 3px;
+  border-style: outset;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.return-btn:hover {
+  transform: scale(1.05);
+}
+
+.return-btn:focus {
+  outline: none;
+}
