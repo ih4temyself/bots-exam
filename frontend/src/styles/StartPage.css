@@ -1,52 +1,3 @@
-@font-face {
-  font-family: Lexend_Regular;
-  src: url('../assets/fonts/Lexend-Regular.ttf') format('ttf');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Lexend_Bold;
-  src: url('../assets/fonts/Lexend-Bold.ttf') format('ttf');
-  font-weight: bold;
-  font-style: normal;
-}
-
-.welcome {
-  font-family: 'Lexend_Bold', serif;
-}
-
-body {
-  background-color: #140C1F;
-  color: white;
-}
-
-.return-btn-container {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.return-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: transparent;
-  color: white;
-  border-color: #C01BC1;
-  border-width: 3px;
-  border-style: outset;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.return-btn:hover {
-  transform: scale(1.05);  /* Hover effect to scale */
-}
-
-.return-btn:focus {
-  outline: none;
-}
-
 .start-page {
   display: flex;
   flex-direction: column;
@@ -95,23 +46,21 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* Hover effect for buttons */
 .start-btn:hover {
-  transform: scale(1.05); /* Scale on hover */
+  transform: scale(1.05);
 }
 
 .start-btn:focus {
   outline: none;
 }
 
-/* Animation for slide-in effect on page load */
+
 .animate-from-top {
-  opacity: 0;  /* Initial state */
-  transform: translateY(-30px); /* Start above the screen */
-  animation: slideInFromTop 1s ease-out forwards; /* Slide-in animation */
+  opacity: 0;
+  transform: translateY(-30px);
+  animation: slideInFromTop 1s ease-out forwards;
 }
 
-/* Keyframes for slide-in animation */
 @keyframes slideInFromTop {
   0% {
     opacity: 0;
@@ -119,15 +68,14 @@ body {
   }
   100% {
     opacity: 1;
-    transform: translateY(0); /* End at original position */
+    transform: translateY(0);
   }
 }
 
-/* Optional: Adjust delays for individual elements */
 .start-btn {
-  animation-delay: 0.5s; /* Delay the button animation */
+  animation-delay: 0.5s;
 }
 
 .welcome-text {
-  animation-delay: 0.2s; /* Delay the welcome text animation */
+  animation-delay: 0.2s;
 }
