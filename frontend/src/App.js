@@ -5,7 +5,7 @@ import StartPage from './pages/StartPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import BotList from './pages/BotList';
-import NotFoundPage from './pages/NotFoundPage';
+// import NotFoundPage from './pages/NotFoundPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import GlobalStyles from './styles/GlobalStyles';
 import ProfilePage from "./pages/ProfilePage";
@@ -44,7 +44,7 @@ function App() {
                     }
                 />
 
-                <Route path="*" element={<NotFoundPage />} />
+                {/*<Route path="*" element={<NotFoundPage />} />*/}
             </Routes>
         </div>
     );
