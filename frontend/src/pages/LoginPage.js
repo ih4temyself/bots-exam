@@ -28,26 +28,26 @@ function LoginPage() {
 
     return (
         <div>
-            <h2>Login</h2>
+            <h2 className="animate-from-top">Login</h2>
             <form onSubmit={handleLogin}>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
 
-                <input
+                <input className="animate-from-top"
                     type="text"
                     placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
-                <input
+                <input className="animate-from-top"
                     type="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit" className="login_button">Login</button>
+                <button type="submit" className="login_button animate-from-top">Login</button>
             </form>
 
-            <p>
+            <p className="acc animate-from-top">
                 Don't have an account?{' '}
                 <div className="register"><Link to="/register">Register here</Link></div>
             </p>
@@ -55,7 +55,7 @@ function LoginPage() {
             {/* Return Button */}
             <div className="return-btn-container">
                 <Link to="/">
-                    <button className="return-btn">Back</button>
+                    <button className="return-btn animate-from-top">Back</button>
                 </Link>
             </div>
         </div>

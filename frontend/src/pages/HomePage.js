@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import api from '../axiosConfig';
+import TopBar from '../components/TopBar/TopBar';
+import '../styles/HomePage.css';
 
-function MainPage() {
-    const [data, setData] = useState(null);
+function HomePage() {
+    const [bots, setBots] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await api.get('/main/');
-                setData(response.data.message);
+                const response = await api.get('/home/');
+                setBots(response.data.bots);
             } catch (error) {
                 console.error('Error fetching main page data', error);
             }
@@ -18,10 +20,10 @@ function MainPage() {
 
     return (
         <div>
-            <h2>Main Page</h2>
-            <p>{data ? data : 'Loading...'}</p>
+            <TopBar />
+
         </div>
     );
 }
 
-export default MainPage;
+    export default HomePage;
