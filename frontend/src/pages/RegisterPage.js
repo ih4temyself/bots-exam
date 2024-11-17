@@ -43,7 +43,7 @@ function RegisterPage() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, first_name: firstName, last_name: lastName, email, password }),
+                body: JSON.stringify({ username, first_name: firstName, last_name: lastName, email, password: password, password_check: passwordCheck }),
             });
 
             if (response.ok) {
@@ -60,52 +60,52 @@ function RegisterPage() {
 
     return (
         <div>
-            <h2>Register</h2>
+            <h2 className="animate-from-top">Register</h2>
             <form onSubmit={handleRegister}>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
 
-                <input
+                <input className="animate-from-top"
                     type="text"
                     placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
-                <input
+                <input className="animate-from-top"
                     type="text"
                     placeholder="First Name"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                 />
-                <input
+                <input className="animate-from-top"
                     type="text"
                     placeholder="Last Name"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                 />
-                <input
+                <input className="animate-from-top"
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <input
+                <input className="animate-from-top"
                     type="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <input
+                <input className="animate-from-top"
                     type="password"
                     placeholder="Confirm Password"
                     value={passwordCheck}
                     onChange={(e) => setPasswordCheck(e.target.value)}
                 />
-                <button type="submit" className="login_button">Register</button>
+                <button type="submit" className="login_button animate-from-top">Register</button>
             </form>
 
-            <div className="return-btn-container">
+            <div className="return-btn-container animate-from-top">
                 <Link to="/">
-                    <button className="return-btn">Back</button>
+                    <button className="return-btn animate-from-top">Back</button>
                 </Link>
             </div>
         </div>
