@@ -8,8 +8,8 @@ import BotList from './pages/BotList';
 import NotFoundPage from './pages/NotFoundPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import GlobalStyles from './styles/GlobalStyles';
-import ProfilePage from "./pages/ProfilePage";
-import HomePage from "./pages/HomePage";
+import ProfilePage from './pages/ProfilePage';
+import HomePage from './pages/HomePage';
 
 function App() {
     return (
