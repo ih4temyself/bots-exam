@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './SideBar_Profile.css';
+import './SideBarProfile.css';
 
-function SideBar_Profile() {
+function SideBarProfile() {
     return (
         <div className="side_container">
             <div className="side_bar">
                 <NavLink
-                    to="/myinfo"
+                    to="/profile/myinfo"
                     className="nav-link"
                     activeClassName="active"
                     exact
@@ -18,7 +18,7 @@ function SideBar_Profile() {
 
             <div className="side_bar">
             <NavLink
-                to="/stats"
+                to="/profile/stats"
                 className="nav-link"
                 activeClassName="active"
             >
@@ -28,7 +28,7 @@ function SideBar_Profile() {
 
             <div className="side_bar">
             <NavLink
-                to="/billings"
+                to="/profile/billings"
                 className="nav-link"
                 activeClassName="active"
             >
@@ -39,4 +39,4 @@ function SideBar_Profile() {
     );
 }
 
-export default SideBar_Profile;
+export default SideBarProfile;

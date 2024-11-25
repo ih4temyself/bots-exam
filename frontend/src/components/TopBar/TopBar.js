@@ -1,8 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './TopBar.css';
 
 function TopBar() {
+    const location = useLocation();
+    const isProfileActive = location.pathname.startsWith("/profile");
     return (
         <div className="top-bar">
             <div className="logo">Logo</div>
@@ -24,8 +26,7 @@ function TopBar() {
                 </NavLink>
                 <NavLink
                     to="/profile"
-                    className="nav-link"
-                    activeClassName="active"
+                    className={`nav-link ${isProfileActive ? 'active' : ''}`}
                 >
                     Profile
                 </NavLink>
