@@ -1,3 +1,16 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
-# Create your views here.
+from .models import TelegramBot
+
+
+from .serializers import TelegramBotSerializer
+
+
+class TelegramBotViewSet(viewsets.ModelViewSet):
+    serializer_class = TelegramBotSerializer
+    permission_classes = [IsAuthenticated]
+
+    # queryset =
+    def get_queryset(self):
+        return TelegramBot.objects.filter(user=self.request.user)
