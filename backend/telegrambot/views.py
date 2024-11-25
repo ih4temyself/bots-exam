@@ -11,6 +11,8 @@ class TelegramBotViewSet(viewsets.ModelViewSet):
     serializer_class = TelegramBotSerializer
     permission_classes = [IsAuthenticated]
 
-    # queryset =
     def get_queryset(self):
         return TelegramBot.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
