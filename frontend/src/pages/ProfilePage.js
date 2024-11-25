@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../axiosConfig';
 import TopBar from '../components/TopBar/TopBar';
+import SideBar_Profile from "../components/SideBar_Profile/SideBar_Profile";
 import '../styles/ProfilePage.css';
 
 function ProfilePage() {
@@ -19,10 +20,14 @@ function ProfilePage() {
     }, []);
 
     return (
-        <div>
-            <TopBar />
-
-        </div>
+        <section>
+            <TopBar/>
+            <div className="container">
+                <SideBar_Profile />
+                <div className="main_container">
+                </div>
+            </div>
+        </section>
     );
 }
 
