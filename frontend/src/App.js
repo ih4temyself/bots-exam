@@ -1,3 +1,4 @@
+// App.js
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import StartPage from './pages/StartPage';
@@ -7,16 +8,8 @@ import BotList from './pages/BotList';
 // import NotFoundPage from './pages/NotFoundPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import GlobalStyles from './styles/GlobalStyles';
-<<<<<<< Updated upstream
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
-=======
-import ProfilePage from './pages/ProfilePage';
-import HomePage from './pages/HomePage';
-import MyInfoPage from './pages/MyInfoPage';
-import StatsPage from './pages/StatsPage';
-import BillingsPage from './pages/BillingsPage';
->>>>>>> Stashed changes
 
 function App() {
     return (
@@ -49,19 +42,9 @@ function App() {
                             <ProfilePage />
                         </ProtectedRoute>
                     }
-<<<<<<< Updated upstream
                 />
 
                 {/*<Route path="*" element={<NotFoundPage />} />*/}
-=======
-                >
-                    {/* Nested routes */}
-                    <Route path="myinfo" element={<MyInfoPage />} />
-                    <Route path="stats" element={<StatsPage />} />
-                    <Route path="billings" element={<BillingsPage />} />
-                </Route>
-                <Route path="*" element={<NotFoundPage />} />
->>>>>>> Stashed changes
             </Routes>
         </div>
     );
