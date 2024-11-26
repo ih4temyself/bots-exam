@@ -1,12 +1,16 @@
 .container{
     display: flex;
+    position: relative;
     margin-top: 35px;
 }
 
-.main_container{
-    width: 999px;
-    height: 756px;
-    border-radius: 8px;
-    border: 3px solid #241D2F;
-    margin-left: 31px;
+.user-info{
+    margin-left: 20px;
+}
+
+.text_info{
+    padding: 7px ;
+    border-bottom: 2px solid #241D2F;
+    margin-bottom: 3%;
+    width: 400px;
 }
