@@ -30,21 +30,36 @@ class BotThread(threading.Thread):
         self.loop = asyncio.new_event_loop()
         asyncio.set_event_loop(self.loop)
         try:
+<<<<<<< HEAD
             asyncio.run_coroutine_threadsafe(self.start_bot(), self.loop)
+=======
+            # Schedule the start_bot coroutine
+            asyncio.run_coroutine_threadsafe(self.start_bot(), self.loop)
+            # Run the event loop until it's stopped
+>>>>>>> 6d77cad351314d5a37bb90cc10a7573c9be49507
             self.loop.run_forever()
         except Exception as e:
             logger.error(f"Error running bot {self.bot_instance.name}: {e}")
         finally:
+<<<<<<< HEAD
+=======
+            # Ensure all tasks are completed and the loop is closed
+>>>>>>> 6d77cad351314d5a37bb90cc10a7573c9be49507
             self.stop_event_loop()
 
     async def start_bot(self):
         self.application = ApplicationBuilder().token(self.bot_instance.token).build()
 
+<<<<<<< HEAD
+=======
+        # Add handlers here
+>>>>>>> 6d77cad351314d5a37bb90cc10a7573c9be49507
         self.application.add_handler(CommandHandler("start", self.start_command))
         self.application.add_handler(
             MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_message)
         )
 
+<<<<<<< HEAD
         await self.application.initialize()
         await self.application.start()
         await self.application.updater.start_polling()
@@ -54,6 +69,23 @@ class BotThread(threading.Thread):
         await self.application.stop()
         await self.application.shutdown()
 
+=======
+        # Start the application
+        await self.application.initialize()
+        await self.application.start()
+
+        # Start polling for updates
+        await self.application.updater.start_polling()
+
+        # Wait until the application is stopped
+        await self.application.updater.wait_until_stopped()
+
+        # Clean up
+        await self.application.stop()
+        await self.application.shutdown()
+
+        # Stop the event loop
+>>>>>>> 6d77cad351314d5a37bb90cc10a7573c9be49507
         self.loop.stop()
 
     async def start_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -64,9 +96,17 @@ class BotThread(threading.Thread):
 
     def stop(self):
         if self.application and self.loop and self.loop.is_running():
+<<<<<<< HEAD
             asyncio.run_coroutine_threadsafe(self.application.stop(), self.loop)
 
     def stop_event_loop(self):
+=======
+            # Schedule application.stop() in the event loop
+            asyncio.run_coroutine_threadsafe(self.application.stop(), self.loop)
+
+    def stop_event_loop(self):
+        # Cancel all pending tasks and close the loop
+>>>>>>> 6d77cad351314d5a37bb90cc10a7573c9be49507
         if self.loop and not self.loop.is_closed():
             pending = asyncio.all_tasks(self.loop)
             for task in pending:
@@ -88,23 +128,44 @@ class Command(BaseCommand):
         self.bot_threads = {}
         self.running = True
 
+<<<<<<< HEAD
+=======
+        # Start initial bots
+>>>>>>> 6d77cad351314d5a37bb90cc10a7573c9be49507
         active_bots = TelegramBot.objects.filter(is_active=True)
         for bot in active_bots:
             self.start_bot(bot)
 
+<<<<<<< HEAD
         try:
             while self.running:
                 time.sleep(5)
 
+=======
+        # Set up a loop to monitor bot status changes
+        try:
+            while self.running:
+                time.sleep(5)  # Adjust the sleep time as needed
+
+                # Refresh bots from the database
+>>>>>>> 6d77cad351314d5a37bb90cc10a7573c9be49507
                 with connection.cursor():
                     current_active_bots = TelegramBot.objects.filter(is_active=True)
                     active_bot_ids = set(bot.id for bot in current_active_bots)
                     existing_bot_ids = set(self.bot_threads.keys())
 
+<<<<<<< HEAD
+=======
+                    # Start new bots
+>>>>>>> 6d77cad351314d5a37bb90cc10a7573c9be49507
                     for bot in current_active_bots:
                         if bot.id not in self.bot_threads:
                             self.start_bot(bot)
 
+<<<<<<< HEAD
+=======
+                    # Stop deactivated bots
+>>>>>>> 6d77cad351314d5a37bb90cc10a7573c9be49507
                     for bot_id in existing_bot_ids - active_bot_ids:
                         self.stop_bot(bot_id)
 
