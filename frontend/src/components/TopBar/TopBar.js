@@ -25,7 +25,7 @@ function TopBar() {
                     Botlist
                 </NavLink>
                 <NavLink
-                    to="/profile"
+                    to="/profile/myinfo"
                     className={`nav-link ${isProfileActive ? 'active' : ''}`}
                 >
                     Profile
