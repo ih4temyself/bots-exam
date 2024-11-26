@@ -12,6 +12,8 @@ import HomePage from './pages/HomePage';
 import MyInfoPage from './pages/MyInfoPage';
 import StatsPage from './pages/StatsPage';
 import BillingsPage from './pages/BillingsPage';
+import BasicPlanPage from './pages/BasicPlanPage';
+import StandartPlanPage from './pages/StandartPlanPage';
 
 function App() {
     return (
@@ -29,6 +31,22 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <HomePage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/plan/basicplan"
+                    element={
+                        <ProtectedRoute>
+                            <BasicPlanPage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/plan/standartplan"
+                    element={
+                        <ProtectedRoute>
+                            <StandartPlanPage />
                         </ProtectedRoute>
                     }
                 />

@@ -1,0 +1,105 @@
+.plans-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 50px;
+    padding: 0 20px;
+}
+
+.plans-title {
+    font-size: 32px;
+    color: white;
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+.plans {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.plan-card {
+    background-color: transparent;
+    border: 3px solid #241D2F;
+    border-radius: 10px;
+    padding: 20px;
+    width: 290px;
+    height: 400px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.plan-card:hover {
+    transform: scale(1.05);
+}
+
+.selected {
+    background-color: #7556ff;
+}
+
+.plan-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.price {
+    font-size: 20px;
+    color: #7556ff;
+}
+
+.bots, .memory, .messages {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.features-title {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.features {
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.feature-item {
+    margin: 5px 0;
+}
+
+.signup-btn, .selected-btn {
+    background-color: #C01BC1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.signup-btn:hover {
+    background-color: #7556ff;
+}
+
+.selected-btn {
+    background-color: transparent;
+    border: 3px solid #C01BC1;
+    cursor: default;
+}
+
+.in_dev {
+    background-color: transparent;
+    color: white;
+    padding: 10px 20px;
+    border: 3px solid #C01BC1;
+    border-radius: 5px;
+    cursor: default;
+    margin-top: 15px;
+}

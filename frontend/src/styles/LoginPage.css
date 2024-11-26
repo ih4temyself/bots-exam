@@ -48,15 +48,12 @@ input {
 
 .login_button:hover {
     transform: scale(1.05);
+    background-color: #C01BC1;
 }
 
 
 .login_button:focus {
     outline: none;
-}
-
-button:hover {
-    background-color: #C01BC1;
 }
 
 p {
