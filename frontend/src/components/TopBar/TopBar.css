@@ -3,17 +3,20 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
+    margin-top: 10px;
     background-color: transparent;
     color: #fff;
     font-size: 22px;
     font-weight: 400;
     line-height: 27.5px;
-    text-align: left;
+    text-align: center;
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
+    position: absolute;
+    margin-left: 90px;
 }
 
 .nav-bar {
@@ -25,7 +28,7 @@
     border: 3px solid #241D2F;
     display: flex;
     gap: 1.5rem;
-    margin-left: 7%;
+    margin-left: 420px;
 }
 
 .nav-link {

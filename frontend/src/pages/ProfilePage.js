@@ -22,11 +22,11 @@ function ProfilePage() {
 
     return (
         <section>
-            <TopBar/>
+            <TopBar />
             <div className="container">
-                <Outlet />
                 <SideBarProfile />
                 <div className="main_container">
+                    <Outlet />
                 </div>
             </div>
         </section>
