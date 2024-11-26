@@ -16,6 +16,11 @@ function RegisterPage() {
     const handleRegister = async (e) => {
         e.preventDefault();
 
+        if (!username || !firstName || !lastName || !email || !password || !passwordCheck) {
+            setError('All fields are required');
+            return;
+        }
+
         if (password !== passwordCheck) {
             setError("Passwords do not match");
             return;
