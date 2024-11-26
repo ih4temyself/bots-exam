@@ -1,12 +1,11 @@
-
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework import routers
 
-from .views import TelegramBotViewSet
+from telegrambot.views import TelegramBotViewSet
 
 router = routers.DefaultRouter()
-router.register(r'', TelegramBotViewSet, basename='bots')
+router.register(r"", TelegramBotViewSet, basename="bots")
 
 urlpatterns = [
-    path('', include(router.urls))
+    path("", include(router.urls)),
 ]

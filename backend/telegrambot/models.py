@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
+
 class TelegramBot(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name="telegram_bots", on_delete=models.CASCADE
@@ -22,4 +23,4 @@ class TelegramBot(models.Model):
         return f"{self.name} ({self.user.username})"
 
     def webhook_url(self):
-        return f"http://localhost:8000/{self.webhook_secret}/"
+        return f"{settings.WEBHOOK_BASE_URL}/webhook/{self.webhook_secret}/"

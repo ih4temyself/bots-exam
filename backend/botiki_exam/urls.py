@@ -23,4 +23,5 @@ urlpatterns = [
     path("api/auth/", include("authapp.urls")),
     path("api/", include("mainpage.urls")),
     path("bots/", include("telegrambot.urls")),
+    path("", include("telegrambot.urls")),
 ]
