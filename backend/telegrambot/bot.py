@@ -6,22 +6,22 @@ TOKEN = '7700331589:AAF-V19Z0Q6YCZOxHnzwy-Ucmrf1RvDSYdY'
 NAME = '@catsfunnycleverbot'
 
 # Commands
-async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE, text):
-    await update.message.reply_text(text)
+async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text('Start command test')
 
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE, text):
-    await update.message.reply_text(text)
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text('Help command test')
 
-async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE, text):
-    await update.message.reply_text(text)
+async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text('Custom command test')
 
 # Responses
 
-def handle_response(text: str, ret_text) -> str:
+def handle_response(text: str) -> str:
     processed: str = text.lower()
 
     if processed:
-        return ret_text
+        return text
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message_type: str = update.message.chat.type
