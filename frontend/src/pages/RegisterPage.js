@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
-
+import { useNavigate } from 'react-router-dom';
 
 function RegisterPage() {
     const [username, setUsername] = useState('');
@@ -11,29 +11,18 @@ function RegisterPage() {
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
     const [error, setError] = useState(null);
-
-    const isPasswordStrong = (password) => {
-        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
-        return regex.test(password);
-    };
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        // Validate password match
+        if (!username || !firstName || !lastName || !email || !password || !passwordCheck) {
+            setError('All fields are required');
+            return;
+        }
+
         if (password !== passwordCheck) {
             setError("Passwords do not match");
-            return;
-        }
-
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailRegex.test(email)) {
-            setError("Invalid email format");
-            return;
-        }
-
-        if (!isPasswordStrong(password)) {
-            setError("Password is too weak. It should contain at least 8 characters, including letters and numbers.");
             return;
         }
 
@@ -43,14 +32,22 @@ function RegisterPage() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, first_name: firstName, last_name: lastName, email, password: password, password_check: passwordCheck }),
+                body: JSON.stringify({ username, first_name: firstName, last_name: lastName, email, password, password_check: passwordCheck }),
             });
 
             if (response.ok) {
-                console.log('User registered successfully');
+                navigate('/login', { state: { successMessage: 'Registration successful! Please log in.' } });
             } else {
                 const data = await response.json();
-                setError(data.error || 'Registration failed');
+                if (data.password) {
+                    setError(data.password[0]);
+                } else if (data.username) {
+                    setError(data.username[0]);
+                } else if (data.email) {
+                    setError(data.email[0]);
+                } else {
+                    setError('Registration failed');
+                }
             }
         } catch (err) {
             console.error('Error during registration:', err);
