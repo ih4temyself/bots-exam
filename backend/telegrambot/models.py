@@ -24,3 +24,11 @@ class TelegramBot(models.Model):
 
     def webhook_url(self):
         return f"{settings.WEBHOOK_BASE_URL}/webhook/{self.webhook_secret}/"
+
+class MessageModel(models.Model):
+    type = models.CharField(max_length=50)
+    message = models.TextField(max_length=1000, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.type}: {self.message}"
