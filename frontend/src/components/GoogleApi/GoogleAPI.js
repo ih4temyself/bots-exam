@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import './GoogleAPI.css'
 
 const GoogleLoginComponent = () => {
     const navigate = useNavigate();
@@ -39,13 +40,17 @@ const GoogleLoginComponent = () => {
                 callback: handleSuccess,
             });
 
-            window.google.accounts.id.renderButton(
-                document.getElementById("google-signin-button"),
-                {
-                    theme: "outline",
-                    size: "large",
-                }
-            );
+                window.google.accounts.id.renderButton(
+                    document.getElementById("google-signin-button"), // Target container
+                    {
+                        theme: "outline",
+                        size: "large",
+                        width: 300,
+                        text: "signin_with",
+                        shape: "pill",
+                        logo_alignment: "left",
+                    }
+                );
         };
 
         if (window.google) {
@@ -61,7 +66,7 @@ const GoogleLoginComponent = () => {
     }, [navigate]);
 
     return (
-        <div>
+        <div className='google_button'>
             <div id="google-signin-button"></div>
         </div>
     );
