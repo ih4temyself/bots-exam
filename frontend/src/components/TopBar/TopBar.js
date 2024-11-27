@@ -1,11 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './TopBar.css';
+import logo from '../../assets/images/logo_botiki.png'
 
 function TopBar() {
     return (
         <div className="top-bar">
-            <div className="logo">Logo</div>
+            <NavLink
+                    to="/home"
+                    className="logo"
+                    exact
+                >
+                <img src={logo} alt="Logo"/>
+            </NavLink>
+
             <div className="nav-bar">
                 <NavLink
                     to="/home"

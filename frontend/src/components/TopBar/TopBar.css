@@ -16,6 +16,10 @@
     font-weight: bold;
 }
 
+img {
+    width: 124px;
+}
+
 .nav-bar {
     width: 575px;
     height: 39px;
@@ -60,6 +64,6 @@
 
 }
 
-.sign-out:hover{
-      transform: scale(1.05);
+.sign-out:hover {
+    transform: scale(1.05);
 }
