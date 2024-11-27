@@ -14,16 +14,16 @@ class TelegramBot(models.Model):
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
-
     config = models.JSONField(default=dict, blank=True)
+    admin_id = models.BigIntegerField()
 
-    webhook_secret = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    @property
+    def bot_type(self):
+        return self.config.get("bot_type", "1")
 
     def __str__(self):
         return f"{self.name} ({self.user.username})"
 
-    def webhook_url(self):
-        return f"{settings.WEBHOOK_BASE_URL}/webhook/{self.webhook_secret}/"
 
 class MessageModel(models.Model):
     type = models.CharField(max_length=50)
@@ -32,3 +32,15 @@ class MessageModel(models.Model):
 
     def __str__(self):
         return f"{self.type}: {self.message}"
+
+
+class ScheduledMessage(models.Model):
+    bot = models.ForeignKey(
+        TelegramBot, related_name="scheduled_messages", on_delete=models.CASCADE
+    )
+    message_text = models.TextField()
+    send_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"ScheduledMessage for {self.bot.name} at {self.send_at}"

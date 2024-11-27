@@ -5,8 +5,8 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .models import TelegramBot
-from .serializers import TelegramBotSerializer
+from .models import ScheduledMessage, TelegramBot
+from .serializers import ScheduledMessageSerializer, TelegramBotSerializer
 
 logger = logging.getLogger("telegrambot")
 
@@ -49,3 +49,23 @@ class TelegramBotViewSet(viewsets.ModelViewSet):
         return Response(
             {"detail": "Bot deactivated successfully."}, status=status.HTTP_200_OK
         )
+
+
+class ScheduledMessageViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing ScheduledMessage instances.
+    """
+
+    serializer_class = ScheduledMessageSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return ScheduledMessage.objects.filter(bot__user=self.request.user)
+
+    def perform_create(self, serializer):
+        bot = serializer.validated_data["bot"]
+        if bot.user != self.request.user:
+            raise serializers.ValidationError(
+                "You do not have permission to schedule messages for this bot."
+            )
+        serializer.save()

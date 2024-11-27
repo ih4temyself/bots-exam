@@ -3,8 +3,10 @@ import logging
 import threading
 import time
 
+from asgiref.sync import sync_to_async  # Import sync_to_async
 from django.core.management.base import BaseCommand
 from django.db import connection
+from django.utils import timezone
 from telegram import Update
 from telegram.ext import (
     ApplicationBuilder,
@@ -14,7 +16,8 @@ from telegram.ext import (
     filters,
 )
 
-from telegrambot.models import TelegramBot
+from telegrambot.handlers import type1_handlers, type2_handlers
+from telegrambot.models import ScheduledMessage, TelegramBot
 
 logger = logging.getLogger(__name__)
 
@@ -40,27 +43,68 @@ class BotThread(threading.Thread):
     async def start_bot(self):
         self.application = ApplicationBuilder().token(self.bot_instance.token).build()
 
-        self.application.add_handler(CommandHandler("start", self.start_command))
-        self.application.add_handler(
-            MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_message)
-        )
+        self.application.bot_data["admin_id"] = self.bot_instance.admin_id
+        self.application.bot_data["bot_instance"] = self.bot_instance
+
+        bot_type = self.bot_instance.config.get("bot_type", "1")
+        if bot_type == "1":
+            self.add_type1_handlers()
+        elif bot_type == "2":
+            self.add_type2_handlers()
+            self.application.create_task(self.check_scheduled_messages())
+        else:
+            logger.error(
+                f"Unknown bot type: {bot_type} for bot {self.bot_instance.name}"
+            )
 
         await self.application.initialize()
         await self.application.start()
         await self.application.updater.start_polling()
-
         await self.application.updater.wait_until_stopped()
-
         await self.application.stop()
         await self.application.shutdown()
 
         self.loop.stop()
 
-    async def start_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        await update.message.reply_text("Hello! This is your bot.")
+    def add_type1_handlers(self):
+        self.application.add_handler(
+            MessageHandler(
+                filters.TEXT & ~filters.COMMAND, type1_handlers.message_resender
+            )
+        )
 
-    async def handle_message(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        await update.message.reply_text("You said: " + update.message.text)
+    def add_type2_handlers(self):
+        self.application.add_handler(
+            CommandHandler("schedule", type2_handlers.schedule_message)
+        )
+        self.application.add_handler(
+            CommandHandler("time", type2_handlers.current_time)
+        )
+
+    async def check_scheduled_messages(self):
+        """
+        Periodically checks for scheduled messages and sends them if their time has arrived.
+        """
+        while True:
+            now = timezone.now()
+            messages = await sync_to_async(list)(
+                ScheduledMessage.objects.filter(bot=self.bot_instance, send_at__lte=now)
+            )
+            for message in messages:
+                try:
+                    await self.application.bot.send_message(
+                        chat_id=self.bot_instance.admin_id,
+                        text=message.message_text,
+                    )
+                    await sync_to_async(message.delete)()
+                    logger.info(
+                        f"Sent scheduled message for bot {self.bot_instance.name}"
+                    )
+                except Exception as e:
+                    logger.error(
+                        f"Failed to send scheduled message for bot {self.bot_instance.name}: {e}"
+                    )
+            await asyncio.sleep(60)
 
     def stop(self):
         if self.application and self.loop and self.loop.is_running():

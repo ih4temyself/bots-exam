@@ -83,17 +83,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: none;
+    border: 2px solid #a35cd8;  /* Add border with primary color */
     width: 367px;
     height: 42px;
     margin: 0 auto;
-    background-color: #C01BC1;
-    color: white;
+    background-color: transparent;  /* Make the background transparent */
+    color: #a35cd8;  /* Set text color to match the border */
     font-size: 18px;
     font-weight: 400;
     line-height: 27.5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
     border-radius: 30px;
     animation-delay: 0.4s;
     text-align: center;
@@ -102,8 +102,10 @@
 /* Add hover effect for better UX */
 .add-button:hover {
     transform: scale(1.05);
-    background-color: #C01BC1;
+    background-color: #transparent;  /* Background changes on hover */
+    color: white;  /* Text changes to white when background is colored */
 }
+
 /* Modal styles */
 .modal {
     position: fixed;
