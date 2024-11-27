@@ -1,12 +1,11 @@
 .container{
     display: flex;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
-.main_container{
-    width: 999px;
+.main_container {
     height: 756px;
     border-radius: 8px;
     border: 3px solid #241D2F;
-    margin-left: 31px;
+    position: relative;
 }

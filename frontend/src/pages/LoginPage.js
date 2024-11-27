@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../axiosConfig';
 import '../styles/LoginPage.css';
+import { useLocation } from 'react-router-dom';
 
 function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const location = useLocation();
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -29,6 +31,11 @@ function LoginPage() {
     return (
         <div>
             <h2 className="animate-from-top">Login</h2>
+
+            {location.state?.successMessage && (
+                <p style={{ color: 'green' }}>{location.state.successMessage}</p>
+            )}
+
             <form onSubmit={handleLogin}>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
 
@@ -52,7 +59,6 @@ function LoginPage() {
                 <div className="register"><Link to="/register">Register here</Link></div>
             </p>
 
-            {/* Return Button */}
             <div className="return-btn-container">
                 <Link to="/">
                     <button className="return-btn animate-from-top">Back</button>

@@ -4,6 +4,7 @@ form {
     width: 300px;
     margin: 0 auto;
     text-align: center;
+    align-items: center;
 }
 
 .register:hover{
@@ -12,23 +13,33 @@ form {
 
 h2 {
     text-align: center;
+    font-size: 36px;
     animation-delay: 0.2s;
 }
 
 input {
     padding: 10px;
+    width: 350px;
+    height: 20px;
     margin: 10px 0;
     border-radius: 30px;
     border: 1px solid #241D2F;
-    animation-delay: 0.3s;
 }
 
 .login_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 367px;
+    height: 42px;
     padding: 10px;
     margin: 10px 0;
     border: none;
     background-color: #C01BC1;
     color: white;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27.5px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
     border-radius: 30px;
@@ -37,15 +48,12 @@ input {
 
 .login_button:hover {
     transform: scale(1.05);
+    background-color: #C01BC1;
 }
 
 
 .login_button:focus {
     outline: none;
-}
-
-button:hover {
-    background-color: #C01BC1;
 }
 
 p {

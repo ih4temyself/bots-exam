@@ -1,10 +1,9 @@
 from django.apps import AppConfig
 
 
-class MainpageConfig(AppConfig):
+class TelegrambotConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "mainpage"
+    name = "telegrambot"
 
     def ready(self):
-        import telegrambot.handlers
         import telegrambot.signals
