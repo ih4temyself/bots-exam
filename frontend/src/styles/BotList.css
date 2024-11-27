@@ -174,3 +174,7 @@
     border: 3px solid #C01BC1;
     color: white;
 }
+
+.token-input{
+    background-color: rgba(255, 255, 255, 0.67);
+}
