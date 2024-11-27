@@ -80,21 +80,29 @@
 }
 
 .add-button {
-    height: 50px; /* Matches other rows' height */
-    width: 100px; /* Optional: Set a fixed width */
-    margin: 0 auto; /* Centers the button horizontally */
-    display: block; /* Ensures centering works with margin auto */
-    background-color: #4caf74; /* Example color */
-    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: none;
-    border-radius: 14px;
+    width: 367px;
+    height: 42px;
+    margin: 0 auto;
+    background-color: #C01BC1;
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27.5px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 30px;
+    animation-delay: 0.4s;
     text-align: center;
 }
 
 /* Add hover effect for better UX */
 .add-button:hover {
-    background-color: #45a049;
+    transform: scale(1.05);
+    background-color: #C01BC1;
 }
 /* Modal styles */
 .modal {
@@ -111,7 +119,7 @@
 }
 
 .modal-content {
-    background: #241d2f;
+    background: #140C1F;
     padding: 20px;
     border-radius: 30px;
     width: 400px;
@@ -129,13 +137,13 @@
 
 .modal-content input,
 .modal-content textarea {
-    width: 270px;
+    width: 350px;
+    height: 40px;
     padding: 8px;
     margin-top: 5px;
-    border: 1px solid #1b1623;
-    border-radius: 3px;
+    border: 1px solid #241D2F;
+    border-radius: 30px;
     color: black;
-    height: 40px; /* Set a fixed height */
     box-sizing: border-box; /* Ensure padding doesn't affect height */
     font-size: 18px; /* Adjust font size if necessary */
 }
@@ -144,6 +152,7 @@
     margin-top: 15px;
     display: flex;
     justify-content: space-between;
+    gap: 5px;
 }
 
 .modal-actions button {
@@ -154,11 +163,12 @@
 }
 
 .modal-actions button[type='button']:first-child {
-    background-color: #3d6045;
+    background-color: #C01BC1;
     color: #ffffff;
 }
 
 .modal-actions button[type='button']:last-child {
-    background-color: #672618;
+    background-color: transparent;
+    border: 3px solid #C01BC1;
     color: white;
 }
