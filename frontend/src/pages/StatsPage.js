@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../axiosConfig';
-import '../styles/MyInfoPage.css';
+import '../styles/StatsPage.css';
 
 function StatsPage() {
     const [stats, setStats] = useState([]);
@@ -8,7 +8,6 @@ function StatsPage() {
     const [loadingStats, setLoadingStats] = useState(true);
     const [loadingLogs, setLoadingLogs] = useState(true);
 
-    // Fetch user stats data
     useEffect(() => {
         const fetchStatsData = async () => {
             try {
@@ -23,7 +22,6 @@ function StatsPage() {
         fetchStatsData();
     }, []);
 
-    // Fetch bot logs data
     useEffect(() => {
         const fetchLogsData = async () => {
             try {
@@ -38,26 +36,68 @@ function StatsPage() {
         fetchLogsData();
     }, []);
 
+    const parseLog = (log) => {
+        const regex = /^\[([^\]]+)\] (\w+) ([^\s]+)\s*(.*)/;
+        const matches = log.match(regex);
+        if (matches) {
+            return {
+                timestamp: matches[1],
+                logType: matches[2],
+                source: matches[3],
+                message: matches[4],
+            };
+        }
+        return {};
+    };
+
+    const getLogClass = (logType) => {
+        switch (logType.toLowerCase()) {
+            case "error":
+                return "log-error";
+            case "warning":
+                return "log-warning";
+            default:
+                return "log-info";
+        }
+    };
+
     return (
-        <div id="my-info-container">
+        <div id="stats-container">
             <h2>My Stats and Bot Logs</h2>
 
-            {/* Logs Section */}
-            <h3>Bot Logs</h3>
+            <h3>Log Viewer</h3>
             {loadingLogs ? (
-                <p>Loading bot logs...</p>
+                <p className="loading-text">Loading bot logs...</p>
             ) : (
                 <div className="user-info">
                     {logs.length > 0 ? (
-                        <ul className="logs-list">
-                            {logs.map((log, index) => (
-                                <li key={index} className="text_info">
-                                    {log}
-                                </li>
-                            ))}
-                        </ul>
+                        <table className="logs-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Log Source</th>
+                                    <th>Message</th>
+                                    <th>Log Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {logs.map((log, index) => {
+                                    const parsedLog = parseLog(log);
+                                    return (
+                                        <tr key={index}>
+                                            <td>{parsedLog.timestamp}</td>
+                                            <td className={getLogClass(parsedLog.logType)}>
+                                                {parsedLog.source}
+                                            </td>
+                                            <td>{parsedLog.message}</td>
+                                            <td>{parsedLog.logType}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
                     ) : (
-                        <p>No logs available.</p>
+                        <p className="no-logs">No logs available.</p>
                     )}
                 </div>
             )}
