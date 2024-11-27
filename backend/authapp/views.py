@@ -57,14 +57,13 @@ class GoogleLoginView(APIView):
 
             try:
                 user = get_user_model().objects.get(email=idinfo['email'])
-            except get_user_model().DoesNotExist
+            except get_user_model().DoesNotExist:
                 user = get_user_model().objects.create_user(
                     username=idinfo['email'],
                     email=idinfo['email'],
                     first_name=idinfo.get('given_name', ''),
                     last_name=idinfo.get('family_name', '')
                 )
-
 
             refresh = RefreshToken.for_user(user)
             access_token = str(refresh.access_token)
