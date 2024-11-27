@@ -1,7 +1,13 @@
+import google.auth
+from google.auth.transport.requests import Request
+from google.oauth2 import id_token
 from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import RegisterSerializer
 from .models import Profile
@@ -39,3 +45,31 @@ class MyInfoView(APIView):
         }
         return Response(data)
 
+
+class GoogleLoginView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        token = request.data.get('token')
+
+        try:
+            idinfo = id_token.verify_oauth2_token(token, Request(), settings.GOOGLE_CLIENT_ID)
+
+            try:
+                user = get_user_model().objects.get(email=idinfo['email'])
+            except get_user_model().DoesNotExist
+                user = get_user_model().objects.create_user(
+                    username=idinfo['email'],
+                    email=idinfo['email'],
+                    first_name=idinfo.get('given_name', ''),
+                    last_name=idinfo.get('family_name', '')
+                )
+
+
+            refresh = RefreshToken.for_user(user)
+            access_token = str(refresh.access_token)
+
+            return Response({'access_token': access_token})
+
+        except ValueError as e:
+            return Response({'error': 'Invalid token'}, status=400)

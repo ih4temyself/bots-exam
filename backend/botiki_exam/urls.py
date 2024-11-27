@@ -17,6 +17,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from authapp.views import GoogleLoginView
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,4 +27,5 @@ urlpatterns = [
     path("api/", include("mainpage.urls")),
     path("bots/", include("telegrambot.urls")),
     path("", include("telegrambot.urls")),
+    path('auth/google/callback/', GoogleLoginView.as_view(), name='google_callback'),
 ]

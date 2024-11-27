@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../axiosConfig';
 import '../styles/LoginPage.css';
 import { useLocation } from 'react-router-dom';
+import GoogleAPI from "../components/GoogleApi/GoogleAPI";
 
 function LoginPage() {
     const [username, setUsername] = useState('');
@@ -51,7 +52,10 @@ function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+
                 <button type="submit" className="login_button animate-from-top">Login</button>
+
+                <GoogleAPI />
             </form>
 
             <p className="acc animate-from-top">

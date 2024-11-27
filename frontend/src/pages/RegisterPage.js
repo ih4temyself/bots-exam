@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
 import { useNavigate } from 'react-router-dom';
+import GoogleAPI from "../components/GoogleApi/GoogleAPI";
 
 function RegisterPage() {
     const [username, setUsername] = useState('');
@@ -97,7 +98,9 @@ function RegisterPage() {
                     value={passwordCheck}
                     onChange={(e) => setPasswordCheck(e.target.value)}
                 />
+
                 <button type="submit" className="login_button animate-from-top">Register</button>
+                <GoogleAPI />
             </form>
 
             <div className="return-btn-container animate-from-top">

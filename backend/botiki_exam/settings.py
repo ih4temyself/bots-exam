@@ -81,6 +81,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "botiki_exam.wsgi.application"
 
+GOOGLE_CLIENT_ID = '1067792808830-2pmlolgkkm3t7d151pol69l33imjvf5j.apps.googleusercontent.com'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
