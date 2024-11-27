@@ -31,7 +31,7 @@ function MyInfoPage() {
                     <div className="text_info"><strong>Name:</strong> {userInfo.name} </div>
                     <div className="text_info"><strong>Email:</strong> {userInfo.email}</div>
                     <div className="text_info"><strong>Joined:</strong> {new Date(userInfo.created_at).toLocaleDateString()}</div>
-                    <h3><div className="text_info"><strong>Balance:</strong> ${userInfo.balance}</div></h3>
+                    <h3><div className="text_info" id='gradientText'><strong>Balance:</strong> ${userInfo.balance}</div></h3>
                 </div>
             )}
         </div>

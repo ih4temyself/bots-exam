@@ -1,13 +1,21 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import './TopBar.css';
+import logo from '../../assets/images/logo_botiki.png'
 
 function TopBar() {
     const location = useLocation();
     const isProfileActive = location.pathname.startsWith("/profile");
     return (
         <div className="top-bar">
-            <div className="logo">Logo</div>
+            <NavLink
+                    to="/home"
+                    className="logo"
+                    exact
+                >
+                <img src={logo} alt="Logo"/>
+            </NavLink>
+
             <div className="nav-bar">
                 <NavLink
                     to="/home"

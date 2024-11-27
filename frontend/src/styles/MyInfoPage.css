@@ -1,3 +1,15 @@
+@keyframes gradientAnimation {
+  0% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
 .container{
     display: flex;
     position: relative;
@@ -13,4 +25,16 @@
     border-bottom: 2px solid #241D2F;
     margin-bottom: 3%;
     width: 400px;
+
+}
+
+#gradientText {
+    font-size: 24px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6b6b, #f4a261, #2a9d8f, #264653);
+    background-size: 400% 400%;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradientAnimation 10s ease infinite;
 }
