@@ -18,8 +18,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # for dev versio
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = ("http://localhost:8000",)
+CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ORIGIN_WHITELIST = ("http://localhost:8000",)
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
