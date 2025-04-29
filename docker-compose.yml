@@ -1,17 +1,57 @@
 version: "3.8"
+
 services:
-  backend:
-    build: ./backend
-    image: hsdem/boti-exam-backend:latest
-    container_name: backend
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    command:
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--certificatesResolvers.le.acme.tlsChallenge=true"
+      - "--certificatesResolvers.le.acme.email=you@example.com"   # ← ваш email
+      - "--certificatesResolvers.le.acme.storage=/letsencrypt/acme.json"
     ports:
-      - "8000:8000"
-    environment:
-      - DEBUG=0
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt/acme.json:/letsencrypt/acme.json:ro"
+    networks:
+      - web
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: hsdem/boti-exam-backend:latest
+    command: ["gunicorn", "botiki_exam.wsgi:application", "--bind", "0.0.0.0:8000"]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`api.localtest.me`)"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=le"
+      - "traefik.http.services.backend.loadbalancer.server.port=8000"
+    networks:
+      - web
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     image: hsdem/boti-exam-frontend:latest
-    container_name: frontend
-    ports:
-      - "3000:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`app.localtest.me`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=le"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
