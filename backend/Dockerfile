@@ -1,20 +1,22 @@
-FROM python:3.11-slim 
+FROM python:3.11-slim
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /code
 
-COPY requirements.txt /code/
+# Копіюємо requirements.txt та entrypoint.sh на самому початку
+COPY requirements.txt entrypoint.sh ./
 
-RUN pip install --no-cache-dir gunicorn
-RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+# Встановлюємо залежності
+RUN pip install --upgrade pip \
+ && pip install --no-cache-dir gunicorn \
+ && pip install --no-cache-dir -r requirements.txt \
+ && chmod +x /code/entrypoint.sh
 
-COPY . /code/
+# Копіюємо решту коду (щоб не перезаписати entrypoint.sh)
+COPY . .
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+EXPOSE 8000
 
-EXPOSE 8000 
-
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/code/entrypoint.sh"]
